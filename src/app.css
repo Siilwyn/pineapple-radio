@@ -1,0 +1,48 @@
+@tailwind base;
+
+@tailwind components;
+
+.button {
+  @apply max-w-xs w-full p-4 mb-4 font-semibold rounded;
+}
+
+.button-gray {
+  @apply text-white bg-gray-700;
+}
+
+.button-gray:hover {
+  @apply bg-gray-900;
+}
+
+@tailwind utilities;
+
+[style*='--aspect-ratio'] > :first-child {
+  width: 100%;
+}
+
+@supports (--custom: property) {
+  [style*='--aspect-ratio'] {
+    position: relative;
+  }
+  [style*='--aspect-ratio']::before {
+    content: '';
+    display: block;
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+  [style*='--aspect-ratio'] > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+}
+
+img[alt='previewavatar'] {
+  max-width: 7.5rem;
+}
+
+@media(min-width: 1024px) {
+  .app-body {
+    grid-template-rows: auto minmax(0, 1fr)
+  }
+}

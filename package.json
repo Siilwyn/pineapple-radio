@@ -1,0 +1,25 @@
+{
+  "name": "pineapple-radio",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "dependencies": {
+    "bent": "^7.3.9",
+    "fuzzysearch": "^1.0.3",
+    "preact": "^10.4.7",
+    "snarkdown": "^1.2.2"
+  },
+  "devDependencies": {
+    "dotenv-safe": "^8.2.0",
+    "postcss-cli": "^7.1.0",
+    "snowpack": "^2.7.7",
+    "tailwindcss": "^1.6.2"
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {}
+    }
+  }
+}
