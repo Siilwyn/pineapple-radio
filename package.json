@@ -6,7 +6,7 @@
     "build": "snowpack build"
   },
   "dependencies": {
-    "bent": "^7.3.9",
+    "bent": "^7.3.10",
     "fuzzysearch": "^1.0.3",
     "preact": "^10.4.7",
     "snarkdown": "^1.2.2"
