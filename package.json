@@ -9,7 +9,7 @@
     "bent": "^7.3.10",
     "fuzzysearch": "^1.0.3",
     "preact": "^10.4.8",
-    "snarkdown": "^1.2.2"
+    "snarkdown": "^2.0.0"
   },
   "devDependencies": {
     "dotenv-safe": "^8.2.0",
