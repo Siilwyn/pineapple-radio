@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "dotenv-safe": "^8.2.0",
-    "postcss-cli": "^7.1.0",
+    "postcss-cli": "^7.1.2",
     "snowpack": "^2.7.7",
     "tailwindcss": "^1.7.6"
   },
