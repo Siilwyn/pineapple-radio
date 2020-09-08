@@ -8,6 +8,7 @@ import useLocalStorage from './hooks/use-local-storage';
 
 import loginForm from './components/login-form';
 import chat from './components/chat';
+import createEventSource from './create-eventsource';
 
 const fetchDatabase = bent(
   'https://treesradio-live.firebaseio.com',
@@ -45,35 +46,30 @@ const app = () => {
   );
 
   useEffect(() => {
-    const waitlistEventSource = new EventSource(
-      'https://treesradio-live.firebaseio.com/waitlist.json'
-    );
-
-    waitlistEventSource.addEventListener(
-      'put',
-      ({ data, parsedEvent = JSON.parse(data) }) => {
+    createEventSource({
+      url: 'https://treesradio-live.firebaseio.com/waitlist.json',
+      listener: ({ data, parsedEvent = JSON.parse(data) }) => {
         if (!parsedEvent.data) return;
 
         setWaitlist(parsedEvent.data);
-      }
-    );
+      },
+    });
   }, []);
 
   useEffect(() => {
     fetchDatabase('/playing.json').then((initialTrack) => {
       setInitialTrack(initialTrack);
 
-      const playingEventSource = new EventSource(
-        'https://treesradio-live.firebaseio.com/playing/info.json'
-      );
+      createEventSource({
+        url: 'https://treesradio-live.firebaseio.com/playing/info.json',
+        listener: ({ data }) => {
+          const trackData = JSON.parse(data).data;
 
-      playingEventSource.addEventListener('put', ({ data }) => {
-        const trackData = JSON.parse(data).data;
+          if (trackData.uid !== initialTrack.info.uid) setInitialTrack(false);
 
-        if (trackData.uid !== initialTrack.info.uid) setInitialTrack(false);
-
-        setIsLiked(false);
-        setCurrentTrack(trackData);
+          setIsLiked(false);
+          setCurrentTrack(trackData);
+        },
       });
     });
   }, []);

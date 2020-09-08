@@ -3,6 +3,8 @@ import fuzzysearch from 'fuzzysearch';
 import snarkdown from 'snarkdown';
 import bent from 'bent';
 
+import createEventSource from '../create-eventsource';
+
 import {
   div,
   span,
@@ -37,13 +39,9 @@ export default ({ authenticationData }) => {
   const [chatMessages, setChatMessages] = useState([]);
 
   useEffect(() => {
-    const chatEventSource = new EventSource(
-      'https://treesradio-live.firebaseio.com/chat.json'
-    );
-
-    chatEventSource.addEventListener(
-      'put',
-      ({ data, parsedEvent = JSON.parse(data) }) => {
+    createEventSource({
+      url: 'https://treesradio-live.firebaseio.com/chat.json',
+      listener: ({ data, parsedEvent = JSON.parse(data) }) => {
         if (parsedEvent.path === '/') {
           setChatMessages(
             Object.entries(parsedEvent.data)
@@ -56,8 +54,8 @@ export default ({ authenticationData }) => {
             ...chatMessages,
           ]);
         }
-      }
-    );
+      },
+    });
   }, []);
 
   useEffect(() => {
