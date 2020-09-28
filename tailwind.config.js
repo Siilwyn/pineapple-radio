@@ -8,5 +8,9 @@ module.exports = {
         'dark': {'raw': '(prefers-color-scheme: dark)'},
       }
     }
-  }
-}
+  },
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
+};
