@@ -21,5 +21,8 @@
     "plugins": {
       "tailwindcss": {}
     }
+  },
+  "volta": {
+    "node": "12.18.3"
   }
 }
