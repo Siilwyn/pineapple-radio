@@ -33,7 +33,7 @@ const formatChatMessageData = ([
   body: snarkdown(msg.replace('==markdown==', '')),
 });
 
-export default ({ authenticationData }) => {
+export default function chat({ authenticationData }) {
   const [newMessage, setNewMessage] = useState('');
   const [newMessageTypeahead, setNewMessageTypeahead] = useState('');
   const [chatMessages, setChatMessages] = useState([]);

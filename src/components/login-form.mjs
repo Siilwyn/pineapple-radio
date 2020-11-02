@@ -9,7 +9,7 @@ const fetchAuthenticationData = bent(
   'json'
 );
 
-export default ({ authenticationData, setAuthenticationData }) => {
+export default function loginForm({ authenticationData, setAuthenticationData }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
