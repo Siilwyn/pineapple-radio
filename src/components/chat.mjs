@@ -109,7 +109,7 @@ export default ({ authenticationData }) => {
           [
             img({
               class: 'w-10 h-10 rounded mr-3',
-              src: `https://api.adorable.io/avatars/40/${message.sender}.png`,
+              src: `https://avatar.tobi.sh/${message.sender}.svg?size=40`,
             }),
             div({}, [
               div({}, [
