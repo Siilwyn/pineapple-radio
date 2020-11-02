@@ -12,17 +12,18 @@
     "snarkdown": "^2.0.0"
   },
   "devDependencies": {
+    "@snowpack/plugin-build-script": "^2.0.11",
     "dotenv-safe": "^8.2.0",
-    "postcss-cli": "^8.1.0",
-    "snowpack": "^2.15.1",
+    "postcss-cli": "^8.2.0",
+    "snowpack": "^2.16.1",
     "tailwindcss": "^1.9.6"
+  },
+  "engines": {
+    "node": ">=12.18.3"
   },
   "postcss": {
     "plugins": {
       "tailwindcss": {}
     }
-  },
-  "volta": {
-    "node": "12.18.3"
   }
 }

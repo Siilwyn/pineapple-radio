@@ -3,9 +3,14 @@ const dotenv = require('dotenv-safe');
 dotenv.config();
 
 module.exports = {
-  'scripts': {
-    'build:css': 'postcss',
-    'mount:src': 'mount ./src --to /',
-    'mount:public': 'mount ./public --to /public',
-  }
+  'mount': {
+    'src': '/',
+    'public': '/public',
+  },
+  'plugins': [
+    [
+      '@snowpack/plugin-build-script',
+      {'cmd': 'postcss', 'input': ['.css'], 'output': ['.css']},
+    ],
+  ],
 };
