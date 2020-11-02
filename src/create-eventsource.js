@@ -7,7 +7,7 @@ export default async function createEventSource({ url, listener }) {
 
       eventSourceInstance.addEventListener('error', () => {
         eventSourceInstance.close();
-        setTimeout(() => resolve(), 10000);
+        setTimeout(() => resolve(), 1000 * 10);
       })
     })
   }

@@ -91,10 +91,19 @@ export default function app() {
 
     const authInterval = setInterval(() => {
       authenticationData && setNewSession();
-    }, 3600000);
+    }, 1000 * 60 * 60);
 
     return () => clearInterval(authInterval);
   }, []);
+
+  useEffect(() => {
+    const presenceInterval = setInterval(() => {
+      authenticationData
+        && fetchDatabase(`/presence/${authenticationData.localId}`)
+    }, 1000 * 60);
+
+    return () => clearInterval(presenceInterval);
+  });
 
   const handleWaitlistSubmit = () => {
     fetchDatabaseEventBus(
