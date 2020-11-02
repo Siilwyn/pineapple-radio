@@ -43,6 +43,7 @@ export default ({ authenticationData, setAuthenticationData }) => {
           input({
             type: 'password',
             required: true,
+            autocomplete: 'current-password',
             value: password,
             onChange: (event) => setPassword(event.target.value),
             class: 'p-2 rounded dark:text-green-100 dark:bg-gray-900',
