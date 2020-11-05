@@ -12,5 +12,9 @@ module.exports = {
       '@snowpack/plugin-build-script',
       {'cmd': 'postcss', 'input': ['.css'], 'output': ['.css']},
     ],
+    [
+      '@snowpack/plugin-optimize',
+      {},
+    ],
   ],
 };
