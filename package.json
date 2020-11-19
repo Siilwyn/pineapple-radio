@@ -14,11 +14,12 @@
   "devDependencies": {
     "@snowpack/plugin-build-script": "^2.0.11",
     "@snowpack/plugin-optimize": "^0.2.9",
+    "autoprefixer": "^10.0.2",
     "dotenv-safe": "^8.2.0",
-    "postcss": "^8.1.4",
+    "postcss": "^8.1.7",
     "postcss-cli": "^8.2.0",
     "snowpack": "^2.17.1",
-    "tailwindcss": "^1.9.6"
+    "tailwindcss": "^2.0.1"
   },
   "engines": {
     "node": ">=12.18.3"

@@ -142,7 +142,7 @@ export default function app() {
         dark:bg-gray-800
         dark:text-green-100
         transition-colors
-        duration-1000
+        duration-500
         ease-out
       `,
     },
