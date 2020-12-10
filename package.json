@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@snowpack/plugin-build-script": "^2.0.12",
-    "@snowpack/plugin-optimize": "^0.2.9",
+    "@snowpack/plugin-optimize": "^0.2.10",
     "autoprefixer": "^10.0.2",
     "dotenv-safe": "^8.2.0",
     "postcss": "^8.1.10",
