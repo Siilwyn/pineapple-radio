@@ -17,7 +17,7 @@
     "autoprefixer": "^10.0.2",
     "dotenv-safe": "^8.2.0",
     "postcss": "^8.1.10",
-    "postcss-cli": "^8.3.0",
+    "postcss-cli": "^8.3.1",
     "snowpack": "^2.17.1",
     "tailwindcss": "^2.0.2"
   },
