@@ -16,7 +16,7 @@
     "@snowpack/plugin-optimize": "^0.2.10",
     "autoprefixer": "^10.0.2",
     "dotenv-safe": "^8.2.0",
-    "postcss": "^8.1.10",
+    "postcss": "^8.2.1",
     "postcss-cli": "^8.3.1",
     "snowpack": "^2.18.5",
     "tailwindcss": "^2.0.2"
