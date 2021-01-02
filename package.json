@@ -8,15 +8,14 @@
   "dependencies": {
     "bent": "^7.3.12",
     "fuzzysearch": "^1.0.3",
-    "preact": "^10.5.7",
+    "preact": "^10.5.8",
     "snarkdown": "^2.0.0"
   },
   "devDependencies": {
     "@snowpack/plugin-build-script": "^2.0.12",
-    "@snowpack/plugin-optimize": "^0.2.10",
     "autoprefixer": "^10.1.0",
     "dotenv-safe": "^8.2.0",
-    "postcss": "^8.2.1",
+    "postcss": "^8.2.2",
     "postcss-cli": "^8.3.1",
     "snowpack": "^2.18.5",
     "tailwindcss": "^2.0.2"
