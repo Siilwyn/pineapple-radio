@@ -12,7 +12,7 @@
     "snarkdown": "^2.0.0"
   },
   "devDependencies": {
-    "@snowpack/plugin-build-script": "^2.0.12",
+    "@snowpack/plugin-build-script": "^2.1.0",
     "autoprefixer": "^10.2.1",
     "dotenv-safe": "^8.2.0",
     "postcss": "^8.2.2",
