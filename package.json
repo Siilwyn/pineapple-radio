@@ -8,7 +8,7 @@
   "dependencies": {
     "bent": "^7.3.12",
     "fuzzysearch": "^1.0.3",
-    "preact": "^10.5.8",
+    "preact": "^10.5.12",
     "snarkdown": "^2.0.0"
   },
   "devDependencies": {
