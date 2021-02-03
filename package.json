@@ -15,7 +15,7 @@
     "@snowpack/plugin-build-script": "^2.0.12",
     "autoprefixer": "^10.2.1",
     "dotenv-safe": "^8.2.0",
-    "postcss": "^8.2.2",
+    "postcss": "^8.2.4",
     "postcss-cli": "^8.3.1",
     "snowpack": "^2.18.5",
     "tailwindcss": "^2.0.2"
