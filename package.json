@@ -21,7 +21,7 @@
     "tailwindcss": "^2.0.3"
   },
   "engines": {
-    "node": ">=12.18.3"
+    "node": ">=15"
   },
   "postcss": {
     "plugins": {
