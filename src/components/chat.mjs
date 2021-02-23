@@ -110,6 +110,7 @@ export default function chat({ authenticationData }) {
             img({
               class: 'w-10 h-10 rounded mr-3',
               src: `https://avatar.tobi.sh/${message.sender}.svg?size=40`,
+              alt: '',
             }),
             div({}, [
               div({}, [
