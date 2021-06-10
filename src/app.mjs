@@ -1,32 +1,14 @@
 import './app.css';
 
 import { useEffect, useState } from 'preact/hooks';
-import bent from 'bent';
 
+import { createEventSource } from './lib/create-eventsource';
+import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './lib/api';
 import { div, span, header, iframe, h1, h2, button } from './create-element';
 import useLocalStorage from './hooks/use-local-storage';
 
 import loginForm from './components/login-form';
 import chat from './components/chat';
-import createEventSource from './create-eventsource';
-
-const fetchDatabase = bent(
-  'https://treesradio-live.firebaseio.com',
-  'GET',
-  'json'
-);
-
-const fetchSession = bent(
-  `https://securetoken.googleapis.com/v1/token`,
-  'POST',
-  'json'
-);
-
-const fetchDatabaseEventBus = bent(
-  'https://treesradio-live.firebaseio.com/event_bus',
-  'PUT',
-  'json'
-);
 
 const createEmbedLink = ({ url, time = false }) => (
   `https://www.youtube-nocookie.com/embed/${url.split('=')[1]}?${

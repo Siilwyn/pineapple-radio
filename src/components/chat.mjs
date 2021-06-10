@@ -3,7 +3,7 @@ import fuzzysearch from 'fuzzysearch';
 import snarkdown from 'snarkdown';
 import bent from 'bent';
 
-import createEventSource from '../create-eventsource';
+import { createEventSource } from '../lib/create-eventsource';
 
 import {
   div,

@@ -1,4 +1,4 @@
-export default async function createEventSource({ url, listener }) {
+export async function createEventSource({ url, listener }) {
   while (true) {
     await new Promise((resolve) => {
       const eventSourceInstance = new EventSource(url);
