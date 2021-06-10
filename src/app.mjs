@@ -96,15 +96,6 @@ export default function app() {
     return () => clearInterval(authInterval);
   }, []);
 
-  useEffect(() => {
-    const presenceInterval = setInterval(() => {
-      authenticationData
-        && fetchDatabase(`/presence/${authenticationData.localId}`)
-    }, 1000 * 60);
-
-    return () => clearInterval(presenceInterval);
-  });
-
   const handleWaitlistSubmit = () => {
     fetchDatabaseEventBus(
       `/${authenticationData.localId}.json?auth=${authenticationData.idToken}`,
