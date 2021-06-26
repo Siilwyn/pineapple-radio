@@ -2,6 +2,7 @@ import { useState } from 'preact/hooks';
 import bent from 'bent';
 
 import { span, form, label, input } from '../create-element';
+import grandButton from './grand-button';
 
 const fetchAuthenticationData = bent(
   'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword',
@@ -13,7 +14,7 @@ export default function loginForm({ authenticationData, setAuthenticationData })
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLoginSubmit = (setAuthenticationData) => (event) => {
+  const handleLoginSubmit = (event) => {
     event.preventDefault();
 
     fetchAuthenticationData(`?key=${import.meta.env.SNOWPACK_PUBLIC_API_KEY}`, {
@@ -27,7 +28,7 @@ export default function loginForm({ authenticationData, setAuthenticationData })
   return authenticationData
     ? span({}, `Hi, ${authenticationData.email.split('@')[0]}!`)
     : (
-      form({ onSubmit: handleLoginSubmit(setAuthenticationData) }, [
+      form({ onSubmit: handleLoginSubmit }, [
         label({ class: 'flex flex-col mb-2' }, [
           span({ class: 'block mb-1' }, 'Email'),
           input({
@@ -49,11 +50,7 @@ export default function loginForm({ authenticationData, setAuthenticationData })
             class: 'p-2 rounded dark:text-green-100 dark:bg-gray-900',
           }),
         ]),
-        input({
-          type: 'submit',
-          value: 'Login',
-          class: 'button button-gray cursor-pointer',
-        }),
+        grandButton({}, 'Login'),
       ])
     )
 };

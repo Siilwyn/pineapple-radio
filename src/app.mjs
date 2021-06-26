@@ -4,11 +4,13 @@ import { useEffect, useState } from 'preact/hooks';
 
 import { createEventSource } from './lib/create-eventsource';
 import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './lib/api';
-import { div, span, header, iframe, h1, h2, button } from './create-element';
+import { div, span, header, iframe, h1, h2 } from './create-element';
 import useLocalStorage from './hooks/use-local-storage';
 
-import loginForm from './components/login-form';
 import chat from './components/chat';
+import grandButton from './components/grand-button';
+import loginForm from './components/login-form';
+import likeButton from './components/like-button';
 
 const createEmbedLink = ({ url, time = false }) => (
   `https://www.youtube-nocookie.com/embed/${url.split('=')[1]}?${
@@ -20,7 +22,7 @@ export default function app() {
   const [initialTrack, setInitialTrack] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(false);
   const [waitlist, setWaitlist] = useState([]);
-  const [isLiked, setIsLiked] = useState(false);
+  const [likeVariant, setLikeVariant] = useState(likeButton.likeVariants.none)
 
   const [authenticationData, setAuthenticationData] = useLocalStorage(
     'authenticationData',
@@ -49,7 +51,7 @@ export default function app() {
 
           if (trackData.uid !== initialTrack.info.uid) setInitialTrack(false);
 
-          setIsLiked(false);
+          setLikeVariant(likeButton.likeVariants.none);
           setCurrentTrack(trackData);
         },
       });
@@ -90,18 +92,6 @@ export default function app() {
         },
       }
     );
-  };
-
-  const handleLikeSubmit = () => {
-    fetchDatabaseEventBus(
-      `/${authenticationData.localId}.json?auth=${authenticationData.idToken}`,
-      {
-        [authenticationData.localId]: {
-          type: 'like',
-          uid: authenticationData.localId,
-        },
-      }
-    ).then(() => setIsLiked(true));
   };
 
   return div(
@@ -163,17 +153,11 @@ export default function app() {
           [
             div({ class: 'row-start-1' }, [
               h2({ class: 'mb-2' }, `DJ: ${currentTrack?.user || '...'}`),
-              div({ class: 'flex flex-col items-start sm:flex-row' }, [
-                button(
+              div({ class: 'flex items-start mb-4' }, [
+                likeButton({ class: 'mr-4', authenticationData, likeVariant, setLikeVariant }),
+                grandButton(
                   {
-                    class: 'button button-gray sm:mr-4',
-                    onClick: handleLikeSubmit,
-                  },
-                  isLiked ? 'Liked!' : 'Like'
-                ),
-                button(
-                  {
-                    class: 'button button-gray sm:mr-4',
+                    class: 'mr-4',
                     onClick: handleWaitlistSubmit,
                   },
                   waitlist.some(({ uid }) => uid === authenticationData?.localId)

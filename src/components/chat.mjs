@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'preact/hooks';
 import fuzzysearch from 'fuzzysearch';
 import snarkdown from 'snarkdown';
-import bent from 'bent';
 
+import { fetchDatabaseEventBus } from '../lib/api'
 import { createEventSource } from '../lib/create-eventsource';
 
 import {
@@ -16,12 +16,6 @@ import {
   input,
   p,
 } from '../create-element';
-
-const fetchDatabaseEventBus = bent(
-  'https://treesradio-live.firebaseio.com/event_bus',
-  'PUT',
-  'json'
-);
 
 const formatChatMessageData = ([
   id,
