@@ -17,7 +17,7 @@
     "postcss": "^8.3.8",
     "postcss-cli": "^8.3.1",
     "snowpack": "^3.5.9",
-    "tailwindcss": "^2.2.4"
+    "tailwindcss": "^2.2.19"
   },
   "engines": {
     "node": "^14.0.0"
