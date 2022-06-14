@@ -2,8 +2,8 @@ import { useState, useEffect } from 'preact/hooks';
 import fuzzysearch from 'fuzzysearch';
 import snarkdown from 'snarkdown';
 
-import { fetchDatabaseEventBus } from '../lib/api'
-import { createEventSource } from '../lib/create-eventsource';
+import { fetchDatabaseEventBus } from '../helpers/api'
+import { createEventSource } from '../helpers/create-eventsource';
 
 import {
   div,

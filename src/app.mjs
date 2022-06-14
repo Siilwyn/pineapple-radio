@@ -2,8 +2,8 @@ import './app.css';
 
 import { useEffect, useState } from 'preact/hooks';
 
-import { createEventSource } from './lib/create-eventsource';
-import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './lib/api';
+import { createEventSource } from './helpers/create-eventsource';
+import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './helpers/api';
 import { div, span, header, iframe, h1, h2 } from './create-element';
 import useLocalStorage from './hooks/use-local-storage';
 
