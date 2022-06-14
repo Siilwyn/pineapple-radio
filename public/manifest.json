@@ -2,7 +2,7 @@
   "name": "Pineapple Radio",
   "display": "standalone",
   "icons": [{
-    "src": "/public/favicon.png",
+    "src": "/favicon.png",
     "sizes": "512x512"
   }]
 }

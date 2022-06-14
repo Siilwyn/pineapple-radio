@@ -17,7 +17,7 @@ export default function loginForm({ authenticationData, setAuthenticationData })
   const handleLoginSubmit = (event) => {
     event.preventDefault();
 
-    fetchAuthenticationData(`?key=${import.meta.env.SNOWPACK_PUBLIC_API_KEY}`, {
+    fetchAuthenticationData(`?key=${import.meta.env.VITE_API_KEY}`, {
       email,
       password,
       returnSecureToken: true,

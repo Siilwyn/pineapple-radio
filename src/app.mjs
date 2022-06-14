@@ -60,7 +60,7 @@ export default function app() {
 
   useEffect(() => {
     const setNewSession = () =>
-      fetchSession(`?key=${import.meta.env.SNOWPACK_PUBLIC_API_KEY}`, {
+      fetchSession(`?key=${import.meta.env.VITE_API_KEY}`, {
         grant_type: 'refresh_token',
         refresh_token: authenticationData.refreshToken,
       }).then(({ refresh_token, id_token }) => {
