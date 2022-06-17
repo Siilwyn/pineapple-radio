@@ -1,6 +1,5 @@
 module.exports = {
-  purge: [
+  content: [
     './src/**/*.mjs',
   ],
-  darkMode: 'media',
 };
