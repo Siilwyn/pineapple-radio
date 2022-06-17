@@ -5,7 +5,7 @@ import { useEffect, useState } from 'preact/hooks';
 import { createEventSource } from './helpers/create-eventsource';
 import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './helpers/api';
 import { div, span, header, iframe, h1, h2 } from './create-element';
-import useLocalStorage from './hooks/use-local-storage';
+import { useLocalStorage } from './hooks.mjs';
 
 import chat from './components/chat';
 import grandButton from './components/grand-button';
@@ -24,10 +24,7 @@ export default function app() {
   const [waitlist, setWaitlist] = useState([]);
   const [likeVariant, setLikeVariant] = useState(likeButton.likeVariants.none)
 
-  const [authenticationData, setAuthenticationData] = useLocalStorage(
-    'authenticationData',
-    null
-  );
+  const [authenticationData, setAuthenticationData] = useLocalStorage('authenticationData');
 
   useEffect(() => {
     createEventSource({

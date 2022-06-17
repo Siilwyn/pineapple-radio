@@ -8,6 +8,7 @@
   "dependencies": {
     "bent": "^7.3.12",
     "fuzzysearch": "^1.0.3",
+    "haken": "github:Siilwyn/haken",
     "preact": "^10.5.15",
     "snarkdown": "^2.0.0"
   },
