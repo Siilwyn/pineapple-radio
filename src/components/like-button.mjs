@@ -1,5 +1,5 @@
-import grandButton from './grand-button';
-import { fetchDatabaseEventBus } from '../helpers/api';
+import grandButton from './grand-button.mjs';
+import { fetchDatabaseEventBus } from '../helpers/api.mjs';
 
 const likeVariants = {
   'none': 'none',

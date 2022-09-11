@@ -1,4 +1,4 @@
-import { button, span } from '../create-element';
+import { button, span } from '../create-element.mjs';
 
 export default function grandButton({ ...rest }, children) {
   return button({ ...rest, class: `pushable ${rest.class}` }, [

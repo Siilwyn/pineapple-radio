@@ -2,8 +2,8 @@ import { useState, useEffect } from 'preact/hooks';
 import fuzzysearch from 'fuzzysearch';
 import snarkdown from 'snarkdown';
 
-import { fetchDatabaseEventBus } from '../helpers/api'
-import { createEventSource } from '../helpers/create-eventsource';
+import { fetchDatabaseEventBus } from '../helpers/api.mjs'
+import { createEventSource } from '../helpers/create-eventsource.js';
 
 import {
   div,
@@ -15,7 +15,7 @@ import {
   label,
   input,
   p,
-} from '../create-element';
+} from '../create-element.mjs';
 
 const formatChatMessageData = ([
   id,
@@ -143,4 +143,4 @@ export default function chat({ authenticationData }) {
       ]),
     ]),
   ];
-};
+}

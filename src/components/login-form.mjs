@@ -1,8 +1,8 @@
 import { useState } from 'preact/hooks';
 import bent from 'bent';
 
-import { span, form, label, input } from '../create-element';
-import grandButton from './grand-button';
+import { span, form, label, input } from '../create-element.mjs';
+import grandButton from './grand-button.mjs';
 
 const fetchAuthenticationData = bent(
   'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword',
@@ -53,4 +53,4 @@ export default function loginForm({ authenticationData, setAuthenticationData })
         grandButton({}, 'Login'),
       ])
     )
-};
+}

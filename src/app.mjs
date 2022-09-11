@@ -2,15 +2,15 @@ import './app.css';
 
 import { useEffect, useState } from 'preact/hooks';
 
-import { createEventSource } from './helpers/create-eventsource';
-import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './helpers/api';
-import { div, span, header, iframe, h1, h2 } from './create-element';
+import { createEventSource } from './helpers/create-eventsource.js';
+import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './helpers/api.mjs';
+import { div, span, header, iframe, h1, h2 } from './create-element.mjs';
 import { useLocalStorage } from './hooks.mjs';
 
-import chat from './components/chat';
-import grandButton from './components/grand-button';
-import loginForm from './components/login-form';
-import likeButton from './components/like-button';
+import chat from './components/chat.mjs';
+import grandButton from './components/grand-button.mjs';
+import loginForm from './components/login-form.mjs';
+import likeButton from './components/like-button.mjs';
 
 const createEmbedLink = ({ url, time = false }) => (
   `https://www.youtube-nocookie.com/embed/${url.split('=')[1]}?${
@@ -168,4 +168,4 @@ export default function app() {
         ),
     ]
   );
-};
+}
