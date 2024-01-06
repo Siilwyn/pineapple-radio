@@ -3,7 +3,7 @@ import fuzzysearch from 'fuzzysearch';
 import snarkdown from 'snarkdown';
 
 import { fetchDatabaseEventBus } from '../helpers/api.mjs'
-import { createEventSource } from '../helpers/create-eventsource.js';
+import { createEventSource } from '../helpers/create-eventsource.mjs';
 
 import {
   div,
