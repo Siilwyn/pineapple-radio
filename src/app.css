@@ -1,116 +1,93 @@
 @tailwind base;
-
 @tailwind components;
-
-.pushable {
-  position: relative;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  outline-offset: 4px;
-  transition: filter 250ms;
-}
-
-.shadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: hsl(0deg 0% 0% / 0.25);
-  will-change: transform;
-  transform: translateY(2px);
-  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-}
-
-.edge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: linear-gradient(
-    to left,
-    hsl(340deg 100% 16%) 0%,
-    hsl(340deg 100% 32%) 8%,
-    hsl(340deg 100% 32%) 92%,
-    hsl(340deg 100% 16%) 100%
-  );
-}
-
-.front {
-  display: block;
-  position: relative;
-  padding: 12px 42px;
-  border-radius: 12px;
-  font-size: 1.25rem;
-  color: white;
-  background: hsl(345deg 100% 47%);
-  will-change: transform;
-  transform: translateY(-4px);
-  transition: transform 500ms cubic-bezier(.3, .7, .4, 1);
-}
-
-.pushable:hover {
-  filter: brightness(110%);
-}
-
-.pushable:hover .front {
-  transform: translateY(-6px);
-  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-}
-
-.pushable:active .front {
-  transform: translateY(-2px);
-  transition: transform 34ms;
-}
-
-.pushable:hover .shadow {
-  transform: translateY(4px);
-  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-}
-
-.pushable:active .shadow {
-  transform: translateY(1px);
-  transition: transform 34ms;
-}
-
-.pushable:focus:not(:focus-visible) {
-  outline: none;
-}
-
 @tailwind utilities;
 
-[style*='--aspect-ratio'] > :first-child {
-  width: 100%;
+@layer base {
+  img[alt='previewavatar'] {
+    max-width: 7.5rem;
+  }
 }
 
-@supports (--custom: property) {
-  [style*='--aspect-ratio'] {
+@layer components {
+  .grand-button {
     position: relative;
+    padding: 0;
+    margin-top: 6px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline-offset: 4px;
+    transition: filter 250ms;
   }
-  [style*='--aspect-ratio']::before {
-    content: '';
-    display: block;
-    padding-bottom: calc(100% / (var(--aspect-ratio)));
+
+  .grand-button:hover {
+    filter: brightness(110%);
   }
-  [style*='--aspect-ratio'] > :first-child {
+
+  .grand-button:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .grand-button__shadow {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
     height: 100%;
+    border-radius: 12px;
+    background: hsl(0deg 0% 0% / 0.25);
+    will-change: transform;
+    transform: translateY(2px);
+    transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .grand-button:hover .grand-button__shadow {
+    transform: translateY(4px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .grand-button:active .grand-button__shadow {
+    transform: translateY(1px);
+    transition: transform 34ms;
+  }
+
+  .grand-button__edge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+      to left,
+      hsl(340deg 100% 16%) 0%,
+      hsl(340deg 100% 32%) 8%,
+      hsl(340deg 100% 32%) 92%,
+      hsl(340deg 100% 16%) 100%
+    );
+  }
+
+  .grand-button__front {
+    display: block;
+    position: relative;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    color: white;
+    background: hsl(345deg 100% 47%);
+    will-change: transform;
+    transform: translateY(-4px);
+    transition: transform 500ms cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .grand-button:hover .grand-button__front {
+    transform: translateY(-6px);
+    transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .grand-button:active .grand-button__front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
   }
 }
 
-img[alt='previewavatar'] {
-  max-width: 7.5rem;
-}
-
-@media(min-width: 1024px) {
-  .app-body {
-    grid-template-rows: auto minmax(0, 1fr)
-  }
-}

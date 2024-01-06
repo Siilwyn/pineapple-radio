@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import bent from 'bent';
 
-import { span, form, label, input } from '../create-element.mjs';
+import { div,span, form, label, input } from '../create-element.mjs';
 import grandButton from './grand-button.mjs';
 
 const fetchAuthenticationData = bent(
@@ -28,29 +28,29 @@ export default function loginForm({ authenticationData, setAuthenticationData })
   return authenticationData
     ? span({}, `Hi, ${authenticationData.email.split('@')[0]}!`)
     : (
-      form({ onSubmit: handleLoginSubmit }, [
-        label({ class: 'flex flex-col mb-2' }, [
-          span({ class: 'block mb-1' }, 'Email'),
+      form({ class: 'flex items-end flex-wrap gap-4', onSubmit: handleLoginSubmit }, [
+        label({ class: 'grow basis-40' }, [
+          div({ class: 'mb-1'}, 'Email'),
           input({
             type: 'email',
             required: true,
             value: email,
             onInput: (event) => setEmail(event.target.value),
-            class: 'p-2 rounded dark:text-green-100 dark:bg-gray-900',
+            class: 'block w-full p-2 rounded dark:bg-gray-900',
           }),
         ]),
-        label({ class: 'flex flex-col mb-3' }, [
-          span({ class: 'block mb-1' }, 'Password'),
+        label({ class: 'grow-[3] basis-52' }, [
+          div({ class: 'mb-1' }, 'Password'),
           input({
             type: 'password',
             required: true,
             autocomplete: 'current-password',
             value: password,
             onInput: (event) => setPassword(event.target.value),
-            class: 'p-2 rounded dark:text-green-100 dark:bg-gray-900',
+            class: 'block w-full p-2 rounded dark:bg-gray-900',
           }),
         ]),
-        grandButton({}, 'Login'),
+        grandButton({ class: 'grow basis-20'}, 'Login'),
       ])
     )
 }
