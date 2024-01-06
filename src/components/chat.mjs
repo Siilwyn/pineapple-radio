@@ -133,6 +133,7 @@ export default function chat({ authenticationData }) {
           `,
           type: 'text',
           required: true,
+          enterkeyhint: 'send',
           value: newMessage,
           onInput: (event) => setNewMessage(event.target.value),
         }),
