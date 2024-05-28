@@ -41,6 +41,7 @@ export default function chat({ authenticationData }) {
             Object.entries(parsedEvent.data)
               .map(formatChatMessageData)
               .reverse()
+              .slice(0, 50)
           );
         } else {
           setChatMessages(chatMessages => [
@@ -92,7 +93,7 @@ export default function chat({ authenticationData }) {
 
   return [
     ol(
-      { class: 'overflow-y-scroll lg:row-start-2 lg:row-end-5 space-y-4' },
+      { class: 'overflow-y-scroll flex flex-col-reverse lg:row-start-2 lg:row-end-5 space-y-4' },
       chatMessages.map((message) =>
         li(
           {
