@@ -96,6 +96,8 @@ export default function app() {
       class: `
         app-body
         grid
+        gap-2
+        pt-1
         lg:grid-cols-5
         lg:h-screen
         bg-gray-200
@@ -114,58 +116,55 @@ export default function app() {
             lg:col-span-5
             justify-between
             items-center
-            p-2
+            px-2
             lg:px-6
             lg:border-b
             lg:border-green-500
-            mb-2
           `
         },
-        [
-          h1({ class: 'border-b border-green-500 lg:border-none mb-1' }, [
-            span({ class: 'text-xl' }, '🍍📻'),
-            span({ class: 'font-semibold' }, ' - a tiny TR frontend'),
-          ]),
-          loginForm({ authenticationData, setAuthenticationData }),
-        ]),
-        div({ class: 'lg:col-span-3' }, [
-          div({ style: '--aspect-ratio:16/9' }, [
-            iframe({
-              width: 480,
-              height: 360,
-              frameborder: 0,
-              src: initialTrack
-                ? createEmbedLink({
-                    url: initialTrack.info.url,
-                    time: initialTrack.time,
-                  })
-                : currentTrack
-                ? createEmbedLink({ url: currentTrack.url })
-                : '',
-            }),
-          ]),
-        ]),
-        div(
-          { class: 'flex lg:grid lg:col-span-2 flex-col max-w-lg max-h-screen px-2 lg:px-4 mx-auto' },
-          [
-            div({ class: 'row-start-1' }, [
-              h2({ class: 'mb-2' }, `DJ: ${currentTrack?.user || '...'}`),
-              div({ class: 'flex items-start mb-4' }, [
-                likeButton({ class: 'mr-4', authenticationData, likeVariant, setLikeVariant }),
-                grandButton(
-                  {
-                    class: 'mr-4',
-                    onClick: handleWaitlistSubmit,
-                  },
-                  waitlist.some(({ uid }) => uid === authenticationData?.localId)
-                    ? 'Leave Waitlist'
-                    : 'Join Waitlist'
-                ),
-              ]),
-            ]),
-            chat({ authenticationData }),
-          ]
+        h1(
+          { class: 'pb-1 border-b border-green-500 lg:border-none' },
+          '🍍📻 - a tiny tr frontend'
         ),
+      ),
+      loginForm({ authenticationData, setAuthenticationData }),
+      div({ class: 'lg:col-span-3' }, [
+          iframe({
+            class: 'w-full h-full aspect-video',
+            width: 420,
+            height: 315,
+            frameborder: 0,
+            src: initialTrack
+              ? createEmbedLink({
+                  url: initialTrack.info.url,
+                  time: initialTrack.time,
+                })
+              : currentTrack
+              ? createEmbedLink({ url: currentTrack.url })
+              : '',
+          }),
+      ]),
+      div(
+        { class: 'flex lg:grid lg:col-span-2 flex-col max-w-lg max-h-screen px-2 lg:px-4 mx-auto' },
+        [
+          div({ class: 'row-start-1' }, [
+            h2({ class: 'mb-2' }, `DJ: ${currentTrack?.user || '...'}`),
+            div({ class: 'flex items-start mb-4' }, [
+              likeButton({ class: 'mr-4', authenticationData, likeVariant, setLikeVariant }),
+              grandButton(
+                {
+                  class: 'mr-4',
+                  onClick: handleWaitlistSubmit,
+                },
+                waitlist.some(({ uid }) => uid === authenticationData?.localId)
+                  ? 'Leave Waitlist'
+                  : 'Join Waitlist'
+              ),
+            ]),
+          ]),
+          chat({ authenticationData }),
+        ]
+      ),
     ]
   );
 }

@@ -26,7 +26,7 @@ export default function loginForm({ authenticationData, setAuthenticationData })
   };
 
   return authenticationData
-    ? span({}, `Hi, ${authenticationData.email.split('@')[0]}!`)
+    ? null
     : (
       form({ class: 'flex items-end flex-wrap gap-4', onSubmit: handleLoginSubmit }, [
         label({ class: 'grow basis-40' }, [
