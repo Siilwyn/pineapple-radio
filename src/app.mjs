@@ -145,22 +145,17 @@ export default function app() {
           }),
       ]),
       div(
-        { class: 'flex lg:grid lg:col-span-2 flex-col max-w-lg max-h-screen px-2 lg:px-4 mx-auto' },
+        { class: 'flex flex-col lg:grid lg:col-span-2 max-w-lg max-h-screen' },
         [
-          div({ class: 'row-start-1' }, [
-            h2({ class: 'mb-2' }, `DJ: ${currentTrack?.user || '...'}`),
-            div({ class: 'flex items-start mb-4' }, [
-              likeButton({ class: 'mr-4', authenticationData, likeVariant, setLikeVariant }),
-              grandButton(
-                {
-                  class: 'mr-4',
-                  onClick: handleWaitlistSubmit,
-                },
-                waitlist.some(({ uid }) => uid === authenticationData?.localId)
-                  ? 'Leave Waitlist'
-                  : 'Join Waitlist'
-              ),
-            ]),
+          h2({ class: 'px-2 lg:px-4 mb-2'}, `DJ: ${currentTrack?.user || '...'}`),
+          div({ class: 'flex gap-2 px-2 lg:px-4 mb-3' }, [
+            likeButton({ authenticationData, likeVariant, setLikeVariant }),
+            grandButton(
+              { onClick: handleWaitlistSubmit },
+              waitlist.some(({ uid }) => uid === authenticationData?.localId)
+                ? 'Leave Waitlist'
+                : 'Join Waitlist'
+            ),
           ]),
           chat({ authenticationData }),
         ]

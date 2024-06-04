@@ -93,7 +93,7 @@ export default function chat({ authenticationData }) {
 
   return [
     ol(
-      { class: 'overflow-y-scroll flex flex-col-reverse lg:row-start-2 lg:row-end-5 space-y-4' },
+      { class: 'overflow-y-scroll flex flex-col-reverse lg:row-start-2 lg:row-end-5 space-y-4 bg-gray-100 dark:bg-gray-900 border-t-2 border-purple-500 px-2 lg:px-4' },
       chatMessages.map((message) =>
         li(
           {
