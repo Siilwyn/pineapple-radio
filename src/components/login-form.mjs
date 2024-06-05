@@ -28,7 +28,7 @@ export default function loginForm({ authenticationData, setAuthenticationData })
   return authenticationData
     ? null
     : (
-      form({ class: 'flex items-end flex-wrap gap-4', onSubmit: handleLoginSubmit }, [
+      form({ class: 'flex items-end flex-wrap gap-4 px-2', onSubmit: handleLoginSubmit }, [
         label({ class: 'grow basis-40' }, [
           div({ class: 'mb-1'}, 'Email'),
           input({

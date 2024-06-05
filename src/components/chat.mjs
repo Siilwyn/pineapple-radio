@@ -119,23 +119,21 @@ export default function chat({ authenticationData }) {
       )
     ),
     form({ onSubmit: handleMessageSubmit }, [
-      label({ class: 'relative' }, [
+      label({ class: 'fixed bottom-0 w-full'}, [
         span({ class: 'sr-only' }, 'Send message'),
         input({
           class: `
-            static
-            bottom-0
-            left-0
             w-full
             p-3
             shadow-2xl
-            dark:bg-gray-900
+            dark:bg-gray-800
             dark:text-green-100
           `,
           type: 'text',
           required: true,
           enterkeyhint: 'send',
           value: newMessage,
+          placeholder: 'Send a message',
           onInput: (event) => setNewMessage(event.target.value),
         }),
         span(
