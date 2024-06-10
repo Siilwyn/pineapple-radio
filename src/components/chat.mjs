@@ -93,7 +93,7 @@ export default function chat({ authenticationData }) {
 
   return [
     ol(
-      { class: 'overflow-y-scroll flex flex-col-reverse lg:row-start-2 lg:row-end-5 space-y-4 bg-gray-100 dark:bg-gray-900 border-t-2 border-purple-500 px-2 lg:px-4' },
+      { class: 'overflow-y-scroll flex flex-col-reverse space-y-4 bg-gray-100 dark:bg-gray-900 border-t-2 border-purple-500 px-2 lg:px-4' },
       chatMessages.map((message) =>
         li(
           {
@@ -119,7 +119,7 @@ export default function chat({ authenticationData }) {
       )
     ),
     form({ onSubmit: handleMessageSubmit }, [
-      label({ class: 'fixed bottom-0 w-full'}, [
+      label({ class: 'fixed bottom-0 w-full lg:static'}, [
         span({ class: 'sr-only' }, 'Send message'),
         input({
           class: `
@@ -127,7 +127,7 @@ export default function chat({ authenticationData }) {
             p-3
             shadow-2xl
             dark:bg-gray-800
-            dark:text-green-100
+            dark:text-white
           `,
           type: 'text',
           required: true,

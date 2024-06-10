@@ -102,7 +102,7 @@ export default function app() {
         lg:h-screen
         bg-gray-200
         dark:bg-gray-800
-        dark:text-green-100
+        dark:text-white
         transition-colors
         duration-500
         ease-out
@@ -145,7 +145,7 @@ export default function app() {
           }),
       ]),
       div(
-        { class: 'flex flex-col lg:grid lg:col-span-2 max-w-lg max-h-screen' },
+        { class: 'flex flex-col lg:col-span-2 max-h-screen' },
         [
           h2({ class: 'px-2 lg:px-4 mb-2'}, `DJ: ${currentTrack?.user || '...'}`),
           div({ class: 'flex gap-2 px-2 lg:px-4 mb-3' }, [
