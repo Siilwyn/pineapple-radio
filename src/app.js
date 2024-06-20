@@ -18,7 +18,7 @@ const createEmbedLink = ({ url, time = false }) => (
   }autoplay=1&enablejsapi=1&modestbranding=1`
 );
 
-export default function app() {
+export default function App() {
   const [initialTrack, setInitialTrack] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(false);
   const [waitlist, setWaitlist] = useState([]);

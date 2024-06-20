@@ -1,4 +1,4 @@
 import { render, h } from 'preact';
-import app from './app.mjs';
+import App from './app.js';
 
-render(h(app), document.body);
+render(h(App), document.body);
