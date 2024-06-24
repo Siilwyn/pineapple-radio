@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import bent from 'bent';
 
-import { div,span, form, label, input } from '../create-element.mjs';
+import { div, form, label, input } from '../create-element.mjs';
 import grandButton from './grand-button.mjs';
 
 const fetchAuthenticationData = bent(
@@ -28,7 +28,7 @@ export default function loginForm({ authenticationData, setAuthenticationData })
   return authenticationData
     ? null
     : (
-      form({ class: 'flex items-end flex-wrap gap-4 px-2', onSubmit: handleLoginSubmit }, [
+      form({ class: 'flex items-end flex-wrap lg:col-span-3 gap-4 px-2', onSubmit: handleLoginSubmit }, [
         label({ class: 'grow basis-40' }, [
           div({ class: 'mb-1'}, 'Email'),
           input({
