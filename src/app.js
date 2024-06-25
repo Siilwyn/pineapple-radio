@@ -145,7 +145,7 @@ export default function App() {
           }),
       ]),
       div(
-        { class: 'flex flex-col lg:col-span-2 max-h-screen' },
+        { class: 'flex flex-col lg:col-span-2 min-h-0 max-h-screen' },
         [
           h2({ class: 'px-2 lg:px-4 mb-2'}, `DJ: ${currentTrack?.user || '...'}`),
           div({ class: 'flex gap-2 px-2 lg:px-4 mb-3' }, [
