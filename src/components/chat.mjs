@@ -98,7 +98,7 @@ export default function chat({ authenticationData }) {
         li(
           {
             key: message.id,
-            class: 'flex',
+            class: 'flex max-w-prose',
             style: 'overflow-wrap: anywhere;',
           },
           [
