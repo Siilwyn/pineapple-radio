@@ -90,7 +90,7 @@ export default function chat({ authenticationData }) {
   return [
     ol(
       {
-        class: 'overflow-y-scroll flex flex-col-reverse space-y-4 p-2 lg:p-4 bg-gray-100 dark:bg-gray-900 border-t-2 border-purple-500',
+        class: 'overflow-y-scroll flex flex-col-reverse gap-y-4 p-2 lg:p-4 bg-gray-100 dark:bg-gray-900 border-t-2 border-purple-500',
         'role': 'log',
         'aria-relevant': 'text',
       },
