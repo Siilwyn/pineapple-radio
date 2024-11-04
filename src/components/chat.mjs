@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'preact/hooks';
+import { useEffect } from 'preact/hooks';
+import { useSignal, useComputed } from '@preact/signals'; 
 import fuzzysearch from 'fuzzysearch';
 import snarkdown from 'snarkdown';
 
@@ -28,52 +29,47 @@ const formatChatMessageData = ([
 });
 
 export default function chat({ authenticationData }) {
-  const [newMessage, setNewMessage] = useState('');
-  const [newMessageTypeahead, setNewMessageTypeahead] = useState('');
-  const [chatMessages, setChatMessages] = useState([]);
+  const newMessage = useSignal('');
+  const chatMessages = useSignal([]);
+
+  const newMessageTypeahead = useComputed(() => (
+    newMessage.value.startsWith('/') && newMessage.value.length > 1
+      ? [
+          '/toke [minutes] [times]',
+          '/gif [keywords]',
+          '/hype',
+          '/join [times]',
+          '/approve',
+          '/bang',
+          '/duckhunt',
+          '/friend',
+          '/spirittoke',
+          '/me [message]',
+          '/roll [sides] [times]',
+          '/save',
+          '/timelimit [minutes]',
+        ].find((suggestion) => fuzzysearch(newMessage.value, suggestion))
+      : ''
+  ));
 
   useEffect(() => {
     createEventSource({
       url: 'https://treesradio-live.firebaseio.com/chat.json',
       listener: ({ data, parsedEvent = JSON.parse(data) }) => {
         if (parsedEvent.path === '/') {
-          setChatMessages(
-            Object.entries(parsedEvent.data)
-              .map(formatChatMessageData)
-              .reverse()
-              .slice(0, 50)
-          );
+          chatMessages.value = Object.entries(parsedEvent.data)
+            .map(formatChatMessageData)
+            .reverse()
+            .slice(0, 50);
         } else {
-          setChatMessages(chatMessages => [
+          chatMessages.value = [
             formatChatMessageData([parsedEvent.path, parsedEvent.data]),
-            ...chatMessages,
-          ]);
+            ...chatMessages.value,
+          ];
         }
       },
     });
   }, []);
-
-  useEffect(() => {
-    setNewMessageTypeahead(
-      newMessage.startsWith('/') && newMessage.length > 1
-        ? [
-            '/toke [minutes] [times]',
-            '/gif [keywords]',
-            '/hype',
-            '/join [times]',
-            '/approve',
-            '/bang',
-            '/duckhunt',
-            '/friend',
-            '/spirittoke',
-            '/me [message]',
-            '/roll [sides] [times]',
-            '/save',
-            '/timelimit [minutes]',
-          ].find((suggestion) => fuzzysearch(newMessage, suggestion))
-        : ''
-    );
-  }, [newMessage]);
 
   const handleMessageSubmit = (event) => {
     event.preventDefault();
@@ -84,11 +80,11 @@ export default function chat({ authenticationData }) {
         [authenticationData.localId]: {
           type: 'chat',
           uid: authenticationData.localId,
-          data: { msg: newMessage },
+          data: { msg: newMessage.value },
         },
       }
     )
-      .then(() => { setNewMessage(''); });
+      .then(() => { newMessage.value = '' });
   };
 
   return [
@@ -98,7 +94,7 @@ export default function chat({ authenticationData }) {
         'role': 'log',
         'aria-relevant': 'text',
       },
-      chatMessages.map((message) =>
+      chatMessages.value.map((message) =>
         li(
           {
             key: message.id,
@@ -138,11 +134,11 @@ export default function chat({ authenticationData }) {
           enterkeyhint: 'send',
           value: newMessage,
           placeholder: 'Send a message',
-          onInput: (event) => setNewMessage(event.target.value),
+          onInput: (event) => { newMessage.value = event.target.value },
         }),
         span(
           { class: 'absolute right-0 mt-3 mr-2 text-gray-500' },
-          newMessageTypeahead
+          newMessageTypeahead,
         ),
       ]),
     ]),

@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useSignal } from '@preact/signals';
 import bent from 'bent';
 
 import { div, form, label, input } from '../create-element.mjs';
@@ -11,15 +11,15 @@ const fetchAuthenticationData = bent(
 );
 
 export default function loginForm({ authenticationData, setAuthenticationData }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const email = useSignal('');
+  const password = useSignal('');
 
   const handleLoginSubmit = (event) => {
     event.preventDefault();
 
     fetchAuthenticationData(`?key=${import.meta.env.VITE_API_KEY}`, {
-      email,
-      password,
+      email: email.value,
+      password: password.value,
       returnSecureToken: true,
     })
       .then(setAuthenticationData);
@@ -34,8 +34,8 @@ export default function loginForm({ authenticationData, setAuthenticationData })
           input({
             type: 'email',
             required: true,
-            value: email,
-            onInput: (event) => setEmail(event.target.value),
+            value: email.value,
+            onInput: (event) => { email.value = event.target.value },
             class: 'block w-full p-2 rounded dark:bg-gray-900',
           }),
         ]),
@@ -45,8 +45,8 @@ export default function loginForm({ authenticationData, setAuthenticationData })
             type: 'password',
             required: true,
             autocomplete: 'current-password',
-            value: password,
-            onInput: (event) => setPassword(event.target.value),
+            value: password.value,
+            onInput: (event) => { password.value = event.target.value },
             class: 'block w-full p-2 rounded dark:bg-gray-900',
           }),
         ]),

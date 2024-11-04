@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@preact/signals": "^1.3.0",
     "bent": "^7.3.12",
     "fuzzysearch": "^1.0.3",
     "haken": "github:Siilwyn/haken",

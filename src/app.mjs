@@ -1,6 +1,7 @@
 import './app.css';
 
-import { useEffect, useState } from 'preact/hooks';
+import { useEffect } from 'preact/hooks';
+import { useSignal } from '@preact/signals'; 
 
 import { createEventSource } from './helpers/create-eventsource.mjs';
 import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './helpers/api.mjs';
@@ -19,10 +20,10 @@ const createEmbedLink = ({ url, time = false }) => (
 );
 
 export default function App() {
-  const [initialTrack, setInitialTrack] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState(false);
-  const [waitlist, setWaitlist] = useState([]);
-  const [likeVariant, setLikeVariant] = useState(likeButton.likeVariants.none)
+  const initialTrack = useSignal(false);
+  const currentTrack = useSignal(false);
+  const waitlist = useSignal([]);
+  const likeVariant = useSignal(likeButton.likeVariants.none)
 
   const [authenticationData, setAuthenticationData] = useLocalStorage('authenticationData');
 
@@ -32,24 +33,26 @@ export default function App() {
       listener: ({ data, parsedEvent = JSON.parse(data) }) => {
         if (!parsedEvent.data) return;
 
-        setWaitlist(parsedEvent.data);
+        waitlist.value = parsedEvent.data;
       },
     });
   }, []);
 
   useEffect(() => {
-    fetchDatabase('/playing.json').then((initialTrack) => {
-      setInitialTrack(initialTrack);
+    fetchDatabase('/playing.json').then((newInitialTrack) => {
+      initialTrack.value = newInitialTrack;
 
       createEventSource({
         url: 'https://treesradio-live.firebaseio.com/playing/info.json',
         listener: ({ data }) => {
           const trackData = JSON.parse(data).data;
 
-          if (trackData.uid !== initialTrack.info.uid) setInitialTrack(false);
+          if (trackData.uid !== newInitialTrack.info.uid) {
+            initialTrack.value = false;
+          }
 
-          setLikeVariant(likeButton.likeVariants.none);
-          setCurrentTrack(trackData);
+          likeVariant.value = likeButton.likeVariants.none;
+          currentTrack.value = trackData;
         },
       });
     });
@@ -82,7 +85,7 @@ export default function App() {
       `/${authenticationData.localId}.json?auth=${authenticationData.idToken}`,
       {
         [authenticationData.localId]: {
-          type: waitlist.some(({ uid }) => uid === authenticationData.localId)
+          type: waitlist.value.some(({ uid }) => uid === authenticationData.localId)
             ? 'leave_waitlist'
             : 'join_waitlist',
           uid: authenticationData.localId,
@@ -134,25 +137,25 @@ export default function App() {
             width: 420,
             height: 315,
             frameborder: 0,
-            src: initialTrack
+            src: initialTrack.value
               ? createEmbedLink({
-                  url: initialTrack.info.url,
-                  time: initialTrack.time,
+                  url: initialTrack.value.info.url,
+                  time: initialTrack.value.time,
                 })
-              : currentTrack
-              ? createEmbedLink({ url: currentTrack.url })
-              : '',
+              : currentTrack.value
+                ? createEmbedLink({ url: currentTrack.value.url })
+                : '',
           }),
       ]),
       div(
         { class: 'flex flex-col lg:col-span-2 min-h-0 max-h-screen' },
         [
-          h2({ class: 'px-2 lg:px-4 mb-2'}, `DJ: ${currentTrack?.user || '...'}`),
+          h2({ class: 'px-2 lg:px-4 mb-2'}, `DJ: ${currentTrack.value.user || '...'}`),
           div({ class: 'flex gap-2 px-2 lg:px-4 mb-3' }, [
-            likeButton({ authenticationData, likeVariant, setLikeVariant }),
+            likeButton({ authenticationData, likeVariant }),
             grandButton(
               { onClick: handleWaitlistSubmit },
-              waitlist.some(({ uid }) => uid === authenticationData?.localId)
+              waitlist.value.some(({ uid }) => uid === authenticationData?.localId)
                 ? 'Leave Waitlist'
                 : 'Join Waitlist'
             ),

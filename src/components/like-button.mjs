@@ -16,13 +16,12 @@ const likeVariantMapping = {
 export default function likeButton({
   authenticationData,
   likeVariant,
-  setLikeVariant,
   ...rest
 }) {
   const handleLikeSubmit = (event) => {
     event.preventDefault();
 
-    if (likeVariant === likeVariants.none) {
+    if (likeVariant.value === likeVariants.none) {
       return fetchDatabaseEventBus(
         `/${authenticationData.localId}.json?auth=${authenticationData.idToken}`,
         {
@@ -31,10 +30,10 @@ export default function likeButton({
             uid: authenticationData.localId,
           },
         }
-      ).then(() => setLikeVariant(likeVariants.like));
+      ).then(() => likeVariant.value = likeVariants.like);
     }
 
-    if (likeVariant === likeVariants.like) {
+    if (likeVariant.value === likeVariants.like) {
       return fetchDatabaseEventBus(
         `/${authenticationData.localId}.json?auth=${authenticationData.idToken}`,
         {
@@ -44,14 +43,14 @@ export default function likeButton({
             data: { msg: `/${likeVariants.hype}` },
           },
         }
-      ).then(() => setLikeVariant(likeVariants.hype));
+      ).then(() => likeVariant.value = likeVariants.hype);
     }
 
   };
 
   return grandButton(
     { ...rest, onClick: handleLikeSubmit },
-    likeVariantMapping[likeVariant]
+    likeVariantMapping[likeVariant.value]
   );
 }
 
