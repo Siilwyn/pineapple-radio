@@ -1,4 +1,5 @@
-import grandButton from './grand-button.mjs';
+import { h } from 'preact';
+import { GrandButton } from './grand-button.mjs';
 import { fetchDatabaseEventBus } from '../helpers/api.mjs';
 
 const likeVariants = {
@@ -13,7 +14,7 @@ const likeVariantMapping = {
   [likeVariants.hype]: 'Hyped!',
 };
 
-export default function likeButton({
+export function LikeButton({
   authenticationData,
   likeVariant,
   ...rest
@@ -29,7 +30,7 @@ export default function likeButton({
             type: likeVariants.like,
             uid: authenticationData.localId,
           },
-        }
+        },
       ).then(() => likeVariant.value = likeVariants.like);
     }
 
@@ -42,16 +43,16 @@ export default function likeButton({
             uid: authenticationData.localId,
             data: { msg: `/${likeVariants.hype}` },
           },
-        }
+        },
       ).then(() => likeVariant.value = likeVariants.hype);
     }
-
   };
 
-  return grandButton(
-    { ...rest, onClick: handleLikeSubmit },
-    likeVariantMapping[likeVariant.value]
+  return h(
+    GrandButton,
+    { onClick: handleLikeSubmit },
+    likeVariantMapping[likeVariant.value],
   );
 }
 
-likeButton.likeVariants = likeVariants;
+LikeButton.likeVariants = likeVariants;

@@ -1,21 +1,21 @@
 import { useEffect } from 'preact/hooks';
-import { useSignal, useComputed } from '@preact/signals'; 
+import { useComputed, useSignal } from '@preact/signals';
 import fuzzysearch from 'fuzzysearch';
 import snarkdown from 'snarkdown';
 
-import { fetchDatabaseEventBus } from '../helpers/api.mjs'
+import { fetchDatabaseEventBus } from '../helpers/api.mjs';
 import { createEventSource } from '../helpers/create-eventsource.mjs';
 
 import {
   div,
-  span,
-  ol,
-  li,
-  img,
   form,
-  label,
+  img,
   input,
+  label,
+  li,
+  ol,
   p,
+  span,
 } from '../create-element.mjs';
 
 const formatChatMessageData = ([
@@ -28,27 +28,27 @@ const formatChatMessageData = ([
   body: snarkdown(msg.replace('==markdown==', '')),
 });
 
-export default function chat({ authenticationData }) {
+export function Chat({ authenticationData }) {
   const newMessage = useSignal('');
   const chatMessages = useSignal([]);
 
   const newMessageTypeahead = useComputed(() => (
     newMessage.value.startsWith('/') && newMessage.value.length > 1
       ? [
-          '/toke [minutes] [times]',
-          '/gif [keywords]',
-          '/hype',
-          '/join [times]',
-          '/approve',
-          '/bang',
-          '/duckhunt',
-          '/friend',
-          '/spirittoke',
-          '/me [message]',
-          '/roll [sides] [times]',
-          '/save',
-          '/timelimit [minutes]',
-        ].find((suggestion) => fuzzysearch(newMessage.value, suggestion))
+        '/toke [minutes] [times]',
+        '/gif [keywords]',
+        '/hype',
+        '/join [times]',
+        '/approve',
+        '/bang',
+        '/duckhunt',
+        '/friend',
+        '/spirittoke',
+        '/me [message]',
+        '/roll [sides] [times]',
+        '/save',
+        '/timelimit [minutes]',
+      ].find((suggestion) => fuzzysearch(newMessage.value, suggestion))
       : ''
   ));
 
@@ -82,15 +82,18 @@ export default function chat({ authenticationData }) {
           uid: authenticationData.localId,
           data: { msg: newMessage.value },
         },
-      }
+      },
     )
-      .then(() => { newMessage.value = '' });
+      .then(() => {
+        newMessage.value = '';
+      });
   };
 
   return [
     ol(
       {
-        class: 'overflow-y-scroll flex flex-col-reverse gap-y-4 p-2 lg:p-4 bg-gray-100 dark:bg-gray-900 border-t-2 border-purple-500',
+        class:
+          'overflow-y-scroll flex flex-col-reverse gap-y-4 p-2 lg:p-4 bg-gray-100 dark:bg-gray-900 border-t-2 border-purple-500',
         'role': 'log',
         'aria-relevant': 'text',
       },
@@ -114,11 +117,14 @@ export default function chat({ authenticationData }) {
               ]),
               p({ dangerouslySetInnerHTML: { __html: message.body } }),
             ]),
-          ]
+          ],
         )
-      )
+      ),
     ),
-    form({ class: 'sticky bottom-0 w-full lg:static', onSubmit: handleMessageSubmit }, [
+    form({
+      class: 'sticky bottom-0 w-full lg:static',
+      onSubmit: handleMessageSubmit,
+    }, [
       label({}, [
         span({ class: 'sr-only' }, 'Send a message'),
         input({
@@ -134,7 +140,9 @@ export default function chat({ authenticationData }) {
           enterkeyhint: 'send',
           value: newMessage,
           placeholder: 'Send a message',
-          onInput: (event) => { newMessage.value = event.target.value },
+          onInput: (event) => {
+            newMessage.value = event.target.value;
+          },
         }),
         span(
           { class: 'absolute right-0 mt-3 mr-2 text-gray-500' },

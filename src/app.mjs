@@ -1,17 +1,22 @@
 import './app.css';
 
+import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
-import { useSignal } from '@preact/signals'; 
+import { useSignal } from '@preact/signals';
 
+import {
+  fetchDatabase,
+  fetchDatabaseEventBus,
+  fetchSession,
+} from './helpers/api.mjs';
 import { createEventSource } from './helpers/create-eventsource.mjs';
-import { fetchDatabase, fetchSession, fetchDatabaseEventBus } from './helpers/api.mjs';
-import { div, span, header, iframe, h1, h2 } from './create-element.mjs';
+import { div, h1, h2, header, iframe } from './create-element.mjs';
 import { useLocalStorage } from './hooks.mjs';
 
-import chat from './components/chat.mjs';
-import grandButton from './components/grand-button.mjs';
-import loginForm from './components/login-form.mjs';
-import likeButton from './components/like-button.mjs';
+import { Chat } from './components/chat.mjs';
+import { GrandButton } from './components/grand-button.mjs';
+import { LoginForm } from './components/login-form.mjs';
+import { LikeButton } from './components/like-button.mjs';
 
 const createEmbedLink = ({ url, time = false }) => (
   `https://www.youtube-nocookie.com/embed/${url.split('=')[1]}?${
@@ -19,13 +24,15 @@ const createEmbedLink = ({ url, time = false }) => (
   }autoplay=1&enablejsapi=1&modestbranding=1`
 );
 
-export default function App() {
+export function App() {
   const initialTrack = useSignal(false);
   const currentTrack = useSignal(false);
   const waitlist = useSignal([]);
-  const likeVariant = useSignal(likeButton.likeVariants.none)
+  const likeVariant = useSignal(LikeButton.likeVariants.none);
 
-  const [authenticationData, setAuthenticationData] = useLocalStorage('authenticationData');
+  const [authenticationData, setAuthenticationData] = useLocalStorage(
+    'authenticationData',
+  );
 
   useEffect(() => {
     createEventSource({
@@ -51,7 +58,7 @@ export default function App() {
             initialTrack.value = false;
           }
 
-          likeVariant.value = likeButton.likeVariants.none;
+          likeVariant.value = LikeButton.likeVariants.none;
           currentTrack.value = trackData;
         },
       });
@@ -85,12 +92,13 @@ export default function App() {
       `/${authenticationData.localId}.json?auth=${authenticationData.idToken}`,
       {
         [authenticationData.localId]: {
-          type: waitlist.value.some(({ uid }) => uid === authenticationData.localId)
-            ? 'leave_waitlist'
-            : 'join_waitlist',
+          type:
+            waitlist.value.some(({ uid }) => uid === authenticationData.localId)
+              ? 'leave_waitlist'
+              : 'join_waitlist',
           uid: authenticationData.localId,
         },
-      }
+      },
     );
   };
 
@@ -123,46 +131,52 @@ export default function App() {
             lg:px-6
             lg:border-b
             lg:border-green-500
-          `
+          `,
         },
         h1(
           { class: 'pb-1 border-b border-green-500 lg:border-none' },
-          '🍍📻 - a tiny tr frontend'
+          '🍍📻 - a tiny tr frontend',
         ),
       ),
-      loginForm({ authenticationData, setAuthenticationData }),
+      h(LoginForm, { authenticationData, setAuthenticationData }),
       div({ class: 'lg:col-span-3' }, [
-          iframe({
-            class: 'w-full h-full aspect-video',
-            width: 420,
-            height: 315,
-            frameborder: 0,
-            src: initialTrack.value
-              ? createEmbedLink({
-                  url: initialTrack.value.info.url,
-                  time: initialTrack.value.time,
-                })
-              : currentTrack.value
-                ? createEmbedLink({ url: currentTrack.value.url })
-                : '',
-          }),
+        iframe({
+          class: 'w-full h-full aspect-video',
+          width: 420,
+          height: 315,
+          frameborder: 0,
+          src: initialTrack.value
+            ? createEmbedLink({
+              url: initialTrack.value.info.url,
+              time: initialTrack.value.time,
+            })
+            : currentTrack.value
+            ? createEmbedLink({ url: currentTrack.value.url })
+            : '',
+        }),
       ]),
       div(
         { class: 'flex flex-col lg:col-span-2 min-h-0 max-h-screen' },
         [
-          h2({ class: 'px-2 lg:px-4 mb-2'}, `DJ: ${currentTrack.value.user || '...'}`),
+          h2(
+            { class: 'px-2 lg:px-4 mb-2' },
+            `DJ: ${currentTrack.value.user || '...'}`,
+          ),
           div({ class: 'flex gap-2 px-2 lg:px-4 mb-3' }, [
-            likeButton({ authenticationData, likeVariant }),
-            grandButton(
+            h(LikeButton, { authenticationData, likeVariant }),
+            h(
+              GrandButton,
               { onClick: handleWaitlistSubmit },
-              waitlist.value.some(({ uid }) => uid === authenticationData?.localId)
+              waitlist.value.some(({ uid }) =>
+                  uid === authenticationData?.localId
+                )
                 ? 'Leave Waitlist'
-                : 'Join Waitlist'
+                : 'Join Waitlist',
             ),
           ]),
-          chat({ authenticationData }),
-        ]
+          h(Chat, { authenticationData }),
+        ],
       ),
-    ]
+    ],
   );
 }
