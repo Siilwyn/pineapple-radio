@@ -17,7 +17,6 @@ const likeVariantMapping = {
 export function LikeButton({
   authenticationData,
   likeVariant,
-  ...rest
 }) {
   const handleLikeSubmit = (event) => {
     event.preventDefault();
