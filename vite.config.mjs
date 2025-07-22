@@ -6,6 +6,6 @@ export default defineConfig({
     outDir: 'build',
   },
   plugins: [
-    preact(),
+    preact({ reactAliasesEnabled: false }),
   ],
 });
